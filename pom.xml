@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kth.scs</groupId>
-	<artifactId>kafkaProducer</artifactId>
+	<artifactId>kafkaConsumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
@@ -23,7 +23,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>kafkaProducer.Main</mainClass>
+							<mainClass>kafkaConsumer.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
