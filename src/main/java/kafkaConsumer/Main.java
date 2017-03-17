@@ -3,10 +3,8 @@ package kafkaConsumer;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
-import java.util.function.Consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
@@ -22,12 +20,12 @@ public class Main {
 		configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
 
 		//Figure out where to start processing messages from
-		KafkaConsumer kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
-		kafkaConsumer.subscribe(topicName);
+		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
+		kafkaConsumer.subscribe(Arrays.asList(topicName));
 		//Start processing messages
 		try {
 			while (true) {
-				Map records = kafkaConsumer.poll(100);
+				ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
 				System.out.println(records);
 			}
 		}catch(Exception ex){
