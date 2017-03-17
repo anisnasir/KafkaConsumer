@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
@@ -26,7 +27,8 @@ public class Main {
 		try {
 			while (true) {
 				ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
-				System.out.println(records);
+				for(ConsumerRecord<String, String> record: records)
+				System.out.println(record.key() + " " + record.value());
 			}
 		}catch(Exception ex){
 			System.out.println("Exception caught " + ex.getMessage());
