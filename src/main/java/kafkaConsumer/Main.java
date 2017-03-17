@@ -1,0 +1,44 @@
+package kafkaConsumer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+public class Main {
+	public static void main(String[] args) throws Exception{
+
+		// Check arguments length value
+		if(args.length == 0){
+			System.out.println("test");
+			return;
+		}
+
+		//Assign topicName to string variable
+		String topicName = args[0].toString();
+
+		Properties props = new Properties();
+		props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+		props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+		props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<String,String>(props);
+		consumer.subscribe(topicName);
+
+		try {
+			while (true) {
+				Map<String, ConsumerRecords<String, String>> records = consumer.poll(1000);
+				System.out.println(records);
+			}
+		} finally {
+			consumer.close();
+		}
+	}
+
+}
