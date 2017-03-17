@@ -3,6 +3,7 @@ package kafkaConsumer;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -17,7 +18,7 @@ public class Main {
 		configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 		configProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		configProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, topicName);
+		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID());
 		configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
 		configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
