@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		String topicName = args[0];
 		Properties configProperties = new Properties();
-		configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, ":9092");
+		configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "9.116.35.208:9092");
 		configProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		configProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
