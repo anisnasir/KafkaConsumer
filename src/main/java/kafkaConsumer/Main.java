@@ -28,10 +28,13 @@ public class Main {
 		kafkaConsumer.subscribe(topicName);
 		//kafkaConsumer.subscribe(Arrays.asList(topicName));
 		//Start processing messages
+		int count = 0;
 		try {
 			while (true) {
 				Map<String, ConsumerRecords<String, String>> records = kafkaConsumer.poll(100);
 				System.out.println(records);
+				if(count++ == 10)
+					break;
 			}
 		}catch(Exception ex){
 			System.out.println("Exception caught " + ex.getMessage());
