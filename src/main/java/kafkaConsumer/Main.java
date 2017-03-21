@@ -2,6 +2,7 @@ package kafkaConsumer;
 
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -12,11 +13,8 @@ public class Main {
 		String topicName = args[0];
 		Properties props = new Properties();
 		props.put("bootstrap.servers", "9.116.35.208:9092");
-		props.put("zookeeper.connect", "9.116.35.208:2181");
+		props.put("client.id", UUID.randomUUID().toString());
 		props.put("group.id", "test");
-		props.put("enable.auto.commit", "true");
-		props.put("auto.commit.interval.ms", "1000");
-		props.put("session.timeout.ms", "30000");
 		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		props.put("partition.assignment.strategy", "range");
