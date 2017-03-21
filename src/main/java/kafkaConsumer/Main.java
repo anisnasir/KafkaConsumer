@@ -11,7 +11,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		String topicName = args[0];
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "9.116.35.208:9092");
+		//props.put("bootstrap.servers", "9.116.35.208:9092");
+		props.put("zookeeper.connect", "9.116.35.208:2181");
 		props.put("group.id", "test");
 		props.put("enable.auto.commit", "true");
 		props.put("auto.commit.interval.ms", "1000");
@@ -23,8 +24,6 @@ public class Main {
 		//Figure out where to start processing messages from
 		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(props);
 		kafkaConsumer.subscribe(topicName);
-		//kafkaConsumer.subscribe(Arrays.asList(topicName));
-		//Start processing messages
 		int count = 0;
 		try {
 			while (true) {
