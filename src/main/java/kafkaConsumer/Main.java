@@ -15,26 +15,18 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		String topicName = args[0];
-		Properties props = new Properties();
-		//configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "9.116.35.208:9092");
-		//configProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-		//configProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-		//configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
-		//configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
-		//configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-		//configProperties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY, "range");
+		Properties configProperties = new Properties();
+		configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "9.116.35.208:9092");
+		configProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+		configProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
+		configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
+		configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-		props.put("bootstrap.servers", "9.116.35.208:9092");
-		props.put("group.id", UUID.randomUUID().toString());
-		props.put("session.timeout.ms", "1000");
-		props.put("enable.auto.commit", "true");
-		props.put("auto.commit.interval.ms", "10000");
-		props.put("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");  
-		props.put("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
-		props.put("partition.assignment.strategy", "range");
+		
 
 		//Figure out where to start processing messages from
-		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(props);
+		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
 		kafkaConsumer.subscribe(Arrays.asList(topicName));
 		//Start processing messages
 		try {
