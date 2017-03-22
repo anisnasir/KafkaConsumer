@@ -24,7 +24,7 @@ public class Main {
 		//configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		//configProperties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY, "range");
 
-		props.put("metadata.broker.list", "9.116.35.208:9092");
+		props.put("bootstrap.servers", "9.116.35.208:9092");
 		props.put("group.id", UUID.randomUUID().toString());
 		props.put("session.timeout.ms", "1000");
 		props.put("enable.auto.commit", "true");
