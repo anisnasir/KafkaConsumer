@@ -22,6 +22,7 @@ public class Main {
 		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, topicName);
 		configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
 		configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "smallest");
+		configProperties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY, "range");
 
 		//Figure out where to start processing messages from
 		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
