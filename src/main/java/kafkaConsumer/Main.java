@@ -25,15 +25,14 @@ public class Main {
 
 		//Figure out where to start processing messages from
 		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
-		kafkaConsumer.subscribe(Arrays.asList(topicName));
+		kafkaConsumer.subscribe(topicName);
 		//Start processing messages
 		try {
 			int count =0;
 
 			while (true) {
-				ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
-				for(ConsumerRecord<String, String> entry: records)
-					System.out.println(entry.key() + " " + entry.value());
+				Map<String, ConsumerRecords<String, String>> records = kafkaConsumer.poll(100);
+				System.out.println(records);
 				if(count++ == 10)
 					break;
 			}
