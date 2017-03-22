@@ -22,17 +22,22 @@ public class Main {
 		configProperties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 		configProperties.put(ConsumerConfig.CLIENT_ID_CONFIG, "simple");
 		configProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+		configProperties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY, "range");
 
 		//Figure out where to start processing messages from
 		KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(configProperties);
-		kafkaConsumer.subscribe(Arrays.asList(topicName));
+		kafkaConsumer.subscribe(topicName);
 		//Start processing messages
 		try {
+			int count =0;
+			
 			while (true) {
-				ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
-				for(ConsumerRecord<String, String> record: records)
-				System.out.println(record.key() + " " + record.value());
+				Map<String, ConsumerRecords<String, String>> records = kafkaConsumer.poll(100);
+				System.out.println(records);
+				if(count++ == 10)
+					break;
 			}
+					
 		}catch(Exception ex){
 			System.out.println("Exception caught " + ex.getMessage());
 		}finally{
